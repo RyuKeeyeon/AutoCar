@@ -4,11 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Control</title>
-    <meta name="csrf-token" content="{{ csrf_token }}"> <!-- CSRF 토큰 메타 태그 추가 -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; }
+        .button { margin: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <button id="forward">전진</button>
-    <button id="backward">후진</button>
+    <h2>Car Control Interface</h2>
+    <button class="button" id="forward">전진</button>
+    <button class="button" id="backward">후진</button>
+    <button class="button" id="left">좌회전</button>
+    <button class="button" id="right">우회전</button>
+    <button class="button" id="stop">정지</button>
 
     <script src="{% static 'control/script.js' %}"></script>
 </body>
