@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .car_control import car
-
+import time
 # Initialize the car outside the view functions to avoid reinitialization on each request
 mycar = car()
 
