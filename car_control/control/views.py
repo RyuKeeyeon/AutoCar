@@ -16,20 +16,20 @@ def backward(request):
     return JsonResponse({'status': 'backward success'})
 
 def left(request):
-    mycar.servo_left()
-    time.sleep(1)  # 서보 모터를 왼쪽으로 회전시킨 후
-    mycar.motor_forward()  # 자동차를 전진시킵니다.
-    time.sleep(1)  # 실제 환경에서는 이 시간을 조정하여 원하는 회전 각도를 얻을 수 있습니다.
-    mycar.servo_center()  # 회전 후에는 서보 모터를 다시 중앙으로 조정합니다.
-    return JsonResponse({'status': 'left turn success'})
+    global mycar
+    mycar.servo_left()  # 좌회전을 위한 서보 모터 조정
+    mycar.motor_forward()  # 전진 명령
+    time.sleep(1)  # 필요한 회전 시간 대기
+    mycar.servo_center()  # 서보 모터 중앙으로 재조정
+    return JsonResponse({'status': '좌회전 성공'})
 
 def right(request):
-    mycar.servo_right()
-    time.sleep(1)  # 서보 모터를 오른쪽으로 회전시킨 후
-    mycar.motor_forward()  # 자동차를 전진시킵니다.
-    time.sleep(1)  # 실제 환경에서는 이 시간을 조정하여 원하는 회전 각도를 얻을 수 있습니다.
-    mycar.servo_center()  # 회전 후에는 서보 모터를 다시 중앙으로 조정합니다.
-    return JsonResponse({'status': 'right turn success'})
+    global mycar
+    mycar.servo_right()  # 우회전을 위한 서보 모터 조정
+    mycar.motor_forward()  # 전진 명령
+    time.sleep(1)  # 필요한 회전 시간 대기
+    mycar.servo_center()  # 서보 모터 중앙으로 재조정
+    return JsonResponse({'status': '우회전 성공'})
 
 
 def stop(request):
