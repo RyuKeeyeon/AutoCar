@@ -1,37 +1,25 @@
 import time
 from ctypes import *
 
-class DC_motor:
-    def __init__(self):
-        self.swcarfunc = cdll.LoadLibrary('/home/pi/swcar_lib/librp_smartcar.so')
-        self.swcarfunc.SIO_Init(0)
-        self.swcarfunc.SIO_BrakeBLDC(1)
-        self.swcarfunc.SIO_MaxMotorSpeed(100)
-        self.motor_stop()
+class Motor:
+    def __init__(self, swcar):
+        self.swcar = swcar
 
-    def motor_move_forward(self, speed):
-        self.swcarfunc.SIO_BrakeBLDC(1)
-        self.swcarfunc.SIO_WriteBLDC(speed)
+    def control_motor(self, motor_status, speed, angle):
 
-    def motor_move_reverse(self, speed):
-        self.motor_move_forward(-speed)
+        self.swcar.SIO_Init(0)
+        self.swcar.SIO_MaxMotorSpeed(100)
+        self.swcar.SIO_BrakeBLDC(1)
 
-    def motor_stop(self):
-        self.swcarfunc.SIO_BrakeBLDC(0)
-        self.swcarfunc.SIO_WriteBLDC(0)
+        if (motor_status == "FORWARD"):
+            self.swcar.SIO_WriteServo(100, -(angle - 50))
+            self.swcar.SIO_WriteBLDC(speed)
+        elif (motor_status == "REVERSE"):
+            self.swcar.SIO_WriteServo(100, -(angle - 50))
+            self.swcar.SIO_WriteBLDC(-(speed))
+        else:
+            self.swcar.SIO_WriteBLDC(0)
 
-class servo_motor:
-    # 0은 우회전 100은 좌회전
-    def __init__(self):
-        self.swcarfunc = cdll.LoadLibrary('/home/pi/swcar_lib/librp_smartcar.so')
-        self.center()
-
-    def set_angle(self, angle):
-        if angle < 0 or angle > 100:
-            print("Angle must be between 0 and 100")
-            return
-        self.swcarfunc.SIO_WriteServo(100, angle)
-
-    def center(self):
-        self.set_angle(50)
-
+# example
+# motor_controller = MotorController(swcar_instance)
+# motor_controller.control_motor("FORWARD", 50, 30)
