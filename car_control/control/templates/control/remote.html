@@ -6,10 +6,11 @@
 		<title>Auto Car</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="csrf-token" content="{{ csrf_token }}">
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-			<style>
-				@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+		
+		<style>
+			@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 @import url("fontawesome-all.min.css");
 
 
@@ -3141,193 +3142,78 @@ input, select, textarea {
 						margin-bottom: 2em;
 					}
 
-	}</style>
-			
+	}
+		</style>
 	</head>
-	<body class="homepage is-preload">
-		<div id="page-wrapper">
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+		<section id="banner">
+			<header>
+				<h2>Hi. You're looking at <strong>MemoryLab</strong>.</h2>
+				<p>
+					SmartCar</a>
+					using Raspberry Pi 4
+				</p>
+			</header>
+		</section>
+        <!-- 생략: 기존 header, nav, banner 등의 섹션 -->
 
-			<!-- Header -->
-				<div id="header">
+        <!-- Main -->
+        <div class="wrapper style2">
+            <article id="main" class="container special">
+                <!-- 생략: 기존의 article 내용 -->
+                <footer>
+					<a href="/" class="button">Home</a>
+                </footer>
+            </article>
+        </div>
 
-					<!-- Inner -->
-						<div class="inner">
-							<header>
-								<h1><a href="index.html" id="logo">MemoryLab</a></h1>
-								<hr />
-								<p>FPGA and DSP-based hardware and software development company</p>
-							</header>
-							<footer>
-								<a href="#banner" class="button circled scrolly">Start</a>
-							</footer>
-						</div>
-
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="index.html">Home</a></li>								
-							</ul>
-						</nav>
-
-				</div>
-
-			<!-- Banner -->
-				<section id="banner">
-					<header>
-						<h2>Hi. You're looking at <strong>MemoryLab</strong>.</h2>
-						<p>
-							SmartCar</a>
-							using Raspberry Pi 4
-						</p>
-					</header>
-				</section>
-
-			<!-- Carousel -->
-				<section class="carousel">
-					<div class="reel">
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">MemoryLab</a></h3>
-							</header>
-							<p> FPGA 및 DSP기반의 H/W 및 S/W 전문 개발 업체</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">EulerBoard</a></h3>
-							</header>
-							<p>Xilinx ZYNQ MPSoC 기반의 통합 인터페이스 보드 (PCIe, Ethernet, QSFP)</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">SRIO++</a></h3>
-							</header>
-							<p>TI320C6678 DSP 기반의 SRIO 인터페이스 확장 보드</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">eGateway / ePortal</a></h3>
-							</header>
-							<p>TCP/IP 통신으로 최대 8대의 독립적인 Serial Port 제어 가능</p>
-						</article>
-
-						
-						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">MemoryLab</a></h3>
-							</header>
-							<p> FPGA 및 DSP기반의 H/W 및 S/W 전문 개발 업체</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">EulerBoard</a></h3>
-							</header>
-							<p>Xilinx ZYNQ MPSoC 기반의 통합 인터페이스 보드 (PCIe, Ethernet, QSFP)</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">SRIO++</a></h3>
-							</header>
-							<p>TI320C6678 DSP 기반의 SRIO 인터페이스 확장 보드</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">eGateway / ePortal</a></h3>
-							</header>
-							<p>TCP/IP 통신으로 최대 8대의 독립적인 Serial Port 제어 가능</p>
-						</article>
-
-					</div>
-				</section>
-
-			<!-- Main -->
-				<div class="wrapper style2">
-
-					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="images/pic06.png" alt="" /></a>
-						<header>
-							<h2><a href="#">높은 정밀도와 신뢰도</a></h2>
-							<p>
-								듀얼 카메라를 이용한 높은 정밀도와 자사 자체 개발 듀얼카메라 거리측정 알고리즘
-							</p>
-						</header>
-						<p>
-							자사 자체개발 스마트카 C 라이브러리
-							스마트카 C 라이브러리는 스마트카의 각종 센서 및 모터를 제어하는 입출력 라이브러리로 제공됩니다.
-							하드웨어의 I/O 를 직접 제어하는 HAL 모듈과, HAL 의 단위 함수를 이용하여 상위 모듈에서 사용하는
-							API 를 제공하는 SIO 의 두 부분으로 구성됩니다.
-						</p>
-						<footer>
-							<a href="control/templates/control/remote.html" class="button">Continue Remote Control</a>
-						</footer>
-					</article>
-
-				</div>
-
-			<!-- Features -->
-				<div class="wrapper style1">
-
-					<section id="features" class="container special">
-						<header>
-							<h2>동계 인턴 사원</h2>
-							<p>담당 사업</p>
-						</header>
-						<div class="row">
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic07.webp" alt="" /></a>
-								<header>
-									<h3><a href="#">류기연</a></h3>
-								</header>
-								<p>
-									차선이탈방지 기능을 통해 차량이 도로의 중앙을 따라 안전하게 주행할 수 있도록 구현. OpenCV를 활용하여 자동차가 차선을 정확하게 인식하고, 필요한 경우 스티어링 조정을 자동으로 수행하여 차선을 벗어나지 않게 합니다.
-									또한, GPIO(General Purpose Input/Output) 핀들을 웹 인터페이스를 통해 제어하는 시스템을 구현하였고 이를 통해 사용자는 어디서나 인터넷 접속이 가능하면 차량의 주요 기능을 원격으로 제어가능합니다.
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic08.webp" alt="" /></a>
-								<header>
-									<h3><a href="#">김예진</a></h3>
-								</header>
-								<p>
-									GUI를 통해 제어되는 스마트 RC카를 개발. RC카에 BMS, Raspberry Pi, 모터, 센서 등을 결합하여 스마트 RC카 모델을 구축하였으며 PyQt5를 활용하여 사용자가 직관적으로 제어할 수 있는 GUI를 개발
-									멀티 스레드를 활용하여 모터 구동, 카메라 화면 출력, 센서값 읽기 등의 작업을 병렬로 처리하였고, 초음파센서, 자이로센서, GPS 센서를 활용하여 RC카의 주행 및 환경 인식 능력을 향상시켰습니다.
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic09.webp" alt="" /></a>
-								<header>
-									<h3><a href="#">지민영</a></h3>
-								</header>
-								<p>
-									RC카에 BMS, Raspberry Pi, 모터, 센서 등을 결합하여 스마트 RC카 모델을 구축
-									멀티 카메라를 이용하여 자사개발 알고리즘으로 거리측정을 가능하게 하였습니다.
-									disparity map을 생성하여 자사의 Smart Car이 더 안전하고 정확하게 주행할 수 있도록 돕습니다.
-								</p>
-							</article>
-						</div>
-					</section>
-
-				</div>
-				
-
-			<!-- Footer -->
+        <!-- Car Control Interface 추가 -->
+        <section id="car-control" class="container special">
+            <header>
+                <h2>Car Control Interface</h2>
+            </header>
+            <div class="row">
+                <div class="col-12">
+					<br>
+					<br>
+					<br>
+					<br>
+                    <!-- 버튼들 -->					
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="button" id="forward">전진</button>
+                    <button class="button" id="backward">후진</button>
+                    <button class="button" id="left">좌회전</button>
+                    <button class="button" id="right">우회전</button>
+                    <button class="button" id="stop">정지</button>
+					
+					<script src="{% static 'control/script.js' %}"></script>
+                </div>
+            </div>
+        </section>
+		<br>
+		<br>	
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>	
+        <!-- Footer -->
 				<div id="footer">
 					<div class="container">
-						
 						<hr />
 						<div class="row">
 							<div class="col-12">
@@ -3351,7 +3237,7 @@ input, select, textarea {
 								<!-- Copyright -->
 									<div class="copyright">
 										<ul class="menu">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design : MemoryLab</a></li>
+											<li>&copy; Untitled. All rights reserved.</li><li>Design: MemoryLab</a></li>
 										</ul>
 									</div>
 
@@ -3372,6 +3258,9 @@ input, select, textarea {
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="{% static 'js/script.js' %}"></script>
+			
+
 	</body>
+</div>
 </html>
+    

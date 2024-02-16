@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('remote/', views.remote, name='remote'),
     path('forward/', views.forward, name='forward'),
     path('backward/', views.backward, name='backward'),
     path('left/', views.left, name='left'),

@@ -1,25 +1,37 @@
 import time
 from ctypes import *
+import sys
 
-class Motor:
+class BLDCMotor:
     def __init__(self, swcar):
         self.swcar = swcar
 
-    def control_motor(self, motor_status, speed, angle):
-
+    def init_motor(self):
         self.swcar.SIO_Init(0)
         self.swcar.SIO_MaxMotorSpeed(100)
         self.swcar.SIO_BrakeBLDC(1)
 
-        if (motor_status == "FORWARD"):
-            self.swcar.SIO_WriteServo(100, -(angle - 50))
+    def control_motor(self, speed):
+        if 0<= speed <= 100:
             self.swcar.SIO_WriteBLDC(speed)
-        elif (motor_status == "REVERSE"):
-            self.swcar.SIO_WriteServo(100, -(angle - 50))
-            self.swcar.SIO_WriteBLDC(-(speed))
         else:
-            self.swcar.SIO_WriteBLDC(0)
+            self.swcar.SIO_WriteBLDC(speed)
+            self.swcar.SIO_BrakeBLDC(0)
 
-# example
-# motor_controller = MotorController(swcar_instance)
-# motor_controller.control_motor("FORWARD", 50, 30)
+class ServoMotor:
+    def __init__(self, swcar, channel=100):
+        self.swcar = swcar
+        self.channel = channel
+
+    def control_motor(self, angle):
+        self.swcar.SIO_WriteServo(self.channel, angle)
+
+
+# 예제 사용법
+# swcar_instance를 초기화하는 코드 필요
+# bldc_motor = BLDCMotor(swcar_instance)
+# bldc_motor.init_motor()
+# bldc_motor.control_motor(50) # BLDC 모터를 50의 속도로 제어
+
+# servo_motor = ServoMotor(swcar_instance)
+# servo_motor.control_motor(30) # 서보 모터를 30도 각도로 제어

@@ -39,3 +39,7 @@ def stop(request):
 
 def index(request):
     return render(request, 'control/index.html')
+
+
+def remote(request):
+    return render(request, 'control/remote.html')

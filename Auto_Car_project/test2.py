@@ -1,34 +1,42 @@
-import cv2
+import time
+from ctypes import *
 
-cam = cv2.VideoCapture(0)
-cam.set(cv2.CAP_PROP_FRAME_WIDTH, 160)
-cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 120)
 
-while(1):
-    _, img = cam.read()
-    cv2.imshow('original', img)
+WiringPi = CDLL("/home/pi/WiringPi/wiringPi/libwiringPi.so.2.70", mode=RTLD_GLOBAL)
+swcar = cdll.LoadLibrary('/home/pi/swcar_lib/librp_smartcar.so')
 
-    crop_img = img[60:120, 0:160]
+class Motor:
+    def __init__(self, swcar):
+        self.swcar = swcar
 
-    gray = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
+    def control_motor(self, motor_status, speed, angle):
+        self.swcar.SIO_Init(0)
+        self.swcar.SIO_MaxMotorSpeed(100)
+        self.swcar.SIO_BrakeBLDC(1)
 
-    blur = cv2.bilateralFilter(gray, 5, 75, 75)
+        if motor_status == "FORWARD":
+            self.swcar.SIO_WriteServo(100, angle)
+            self.swcar.SIO_WriteBLDC(speed)
+        elif motor_status == "REVERSE":
+            self.swcar.SIO_WriteServo(100, angle)
+            self.swcar.SIO_WriteBLDC(-speed)
+        else:  # STOP
+            self.swcar.SIO_WriteBLDC(0)
+            self.swcar.SIO_BrakeBLDC(0)
 
-    _, thresh1 = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
-    k = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-    opening = cv2.morphologyEx(thresh1, cv2.MORPH_OPEN, k)
+swcar_instance = swcar
 
-    cv2.imshow('opening', opening)
+# MotorController 클래스의 인스턴스를 생성합니다.
+motor_controller = Motor(swcar_instance)
 
-    contours1, _ = cv2.findContours(opening.copy(), cv2.RETR_EXTERNAL,
-    cv2.CHAIN_APPROX_NONE)
+# 3초 동안 전진
+motor_controller.control_motor("FORWARD", 50, 50)
+time.sleep(3)
 
-    cv2.drawContours(crop_img, contours1, -1, (0, 0, 255), 4)
+# 3초 동안 후진
+motor_controller.control_motor("REVERSE", 50, 50)
+time.sleep(3)
 
-    cv2.imshow('contour', crop_img)
-
-    if cv2.waitKey(1) == ord('q'):
-        break
-
-cv2.destroyAllWindows()
+# 정지
+motor_controller.control_motor("STOP", 0, 0)

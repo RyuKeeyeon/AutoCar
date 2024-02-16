@@ -6,7 +6,7 @@ import datetime
 import sys
 
 show_image = False
-class LaneRecognition:
+class LaneRecognition(object):
     def __init__(self):
         self.curr_steering_angle = 90
 
@@ -44,14 +44,27 @@ def detect_lane(frame):
 
     return lane_lines, lane_lines_image
 
+
 def detect_edges(frame):
-    # filter for lane lines
+    # Convert to HSV color space
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    # Assuming lane lines are white
-    lower_white = np.array([0, 0, 200])
-    upper_white = np.array([180, 255, 255])
-    mask = cv2.inRange(hsv, lower_white, upper_white)
+
+    # Apply Gaussian Blur to smooth out the image
+    # This helps in reducing noise and improve edge detection
+    # kernel size is (5, 5) and sigmaX is 0 - letting OpenCV decide the optimal value
+    blurred = cv2.GaussianBlur(hsv, (5, 5), 0)
+
+    # Adjust the lower and upper bounds for white color detection
+    # Lower saturation to potentially include more variations of white
+    lower_white = np.array([0, 0, 180])
+    upper_white = np.array([180, 30, 255])
+
+    # Apply the mask on the blurred image
+    mask = cv2.inRange(blurred, lower_white, upper_white)
+
+    # Detect edges using Canny edge detector
     edges = cv2.Canny(mask, 200, 400)
+
     return edges
 
 
@@ -81,7 +94,7 @@ def average_slope_intercept(frame, line_segments):
     left_fit = []
     right_fit = []
 
-    boundary = 1 / 3
+    boundary = 1 / 2
     left_region_boundary = width * (1 - boundary)  # left lane line segment should be on left 2/3 of the screen
     right_region_boundary = width * boundary  # right lane line segment should be on left 2/3 of the screen
 
